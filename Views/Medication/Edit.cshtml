@@ -1,0 +1,85 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@model MedicationViewModel
+@{
+    string title = ViewBag.Action + " Medication";
+    ViewBag.Title = title;
+}
+
+<h2>@ViewBag.Title</h2> <!-- Include title as h2 header -->
+
+<div asp-validation-summary="All" class="text-danger"></div> <!-- Display validation errors -->
+
+<!-- Create Edit form -->
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <!-- Label & listbox for medication drug class -->
+        <label asp-for="CurrentMedication.DrugClassId">Drug Class</label>
+        <select asp-for="CurrentMedication.DrugClassId" class="form-control">
+            <option value="">select a drug class</option>
+            @foreach (DrugClass dc in Model.DrugClasses)
+            {
+                <option value="@dc.DrugClassId">@dc.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <!-- Label & textbox for medication name -->
+        <label asp-for="CurrentMedication.Name">Name</label>
+        <input asp-for="CurrentMedication.Name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <!-- Label & textbox for medication strength -->
+        <label asp-for="CurrentMedication.Strength">Strength</label>
+        <input asp-for="CurrentMedication.Strength" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <!-- Label & listbox for medication UoM -->
+        <label asp-for="CurrentMedication.UomId">Unit of Measure</label>
+        <select asp-for="CurrentMedication.UomId" class="form-control">
+            <option value="">select a unit of measure</option>
+            @foreach (Uom u in Model.Uoms)
+            {
+                <option value="@u.UomId">@u.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <!-- Label & listbox for medication dosage form -->
+        <label asp-for="CurrentMedication.DosageFormId">Dosage Form</label>
+        <select asp-for="CurrentMedication.DosageFormId" class="form-control">
+            <option value="">select a dosage form</option>
+            @foreach (DosageForm df in Model.DosageForms)
+            {
+                <option value="@df.DosageFormId">@df.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <!-- Label & listbox for medication route -->
+        <label asp-for="CurrentMedication.RouteId">Route</label>
+        <select asp-for="CurrentMedication.RouteId" class="form-control">
+            <option value="">select a route</option>
+            @foreach (Route r in Model.Routes)
+            {
+                <option value="@r.RouteId">@r.Name</option>
+            }
+        </select>
+    </div>
+
+    <input type="hidden" asp-for="CurrentMedication.MedicationId" /> <!-- Hidden textbox for medication ID -->
+
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button> <!-- Include button for add/edit action -->
+    <a asp-action="List"
+       class="btn btn-primary">Cancel</a> <!-- Include button for cancel action -->
+</form>

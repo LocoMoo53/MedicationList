@@ -1,0 +1,23 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h1>Welcome to the Medication Management Application!</h1> <!-- h1 header -->
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="list-group">
+            <a asp-controller="Medication" asp-action="List"
+               class="list-group-item">View medications</a>
+            <a asp-controller="Home" asp-action="About"
+               class="list-group-item">Learn more about us</a>
+        </div>
+    </div>
+</div>

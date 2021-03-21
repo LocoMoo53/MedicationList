@@ -1,0 +1,46 @@
+﻿@model MedicationViewModel
+@{
+    ViewData["Title"] = "Refills";
+    var session = new MedicationSession(Context.Session); // Create & set new Medication session
+}
+
+<div class="text-center">
+    <h2>My Refills</h2> <!-- h2 header-->
+    <!-- Buttons for navigating back to medications list & clearing refills -->
+    <form asp-action="Clear" method="post">
+        <a asp-action="List" asp-controller="Medication" class="btn btn-primary">
+            Back to Medication List
+        </a>
+        <button type="submit" class="btn btn-primary">
+            Clear Refills
+        </button>
+    </form>
+    <br />
+</div>
+
+<div>
+    <!-- Table displaying medications marked for refill -->
+    <table class="table table-bordered table-striped">
+        <!-- Create bordered & striped table -->
+        <thead>
+            <tr>
+                <th>Name</th> <!-- Column for medication names -->
+                <th>Strength</th> <!-- Column for medication strengths -->
+                <th>Dosage Form</th> <!-- Column for medication dosage forms -->
+                <th>Route</th> <!-- Column for medication routes -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Loop through medications -->
+            @foreach (var medication in Model.Medications)
+            {
+                <tr>
+                    <td>@medication.Name</td> <!-- Display name for each medication -->
+                    <td>@medication.Strength @medication.Uom.Name</td> <!-- Display strength for each medication -->
+                    <td>@medication.DosageForm.Name</td> <!-- Display form for each medication -->
+                    <td>@medication.Route.Name</td> <!-- Display route for each medication -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,21 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    10-25-2020
+    "Week 5 Develop, Code, Test and Debug web app Assignments (Team)"
+    "Create an MVC Core web app"
+-->
+
+@model Uom
+@{
+    ViewBag.Title = "Delete Unit of Measure";
+}
+
+<h1>Confirm Deletion</h1> <!-- h1 header -->
+<h3>@Model.Name</h3> <!-- display selected UoM -->
+
+<!-- form to confirm deletion of selected UoM -->
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="UomId" />
+    <button type="submit" class="btn btn-primary">Delete</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

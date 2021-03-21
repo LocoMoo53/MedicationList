@@ -1,0 +1,23 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@model MedicationViewModel
+@{
+    ViewBag.Title = "Delete Medication";
+}
+
+<h2>Confirm Deletion</h2> <!-- Set "Confirm Deletion" h2 header -->
+<h3>@Model.CurrentMedication.Name @Model.CurrentMedication.Strength @Model.CurrentMedication.Uom.Name</h3> <!-- Set medication name h3 header -->
+
+<!-- Create form for deleting medication -->
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="CurrentMedication.MedicationId" /> <!-- Hidden textbox for medication ID -->
+
+    <button type="submit" class="btn btn-primary">Delete</button> <!-- Button for delete action -->
+    <a asp-controller="Medication" asp-action="List"
+       class="btn btn-primary">Cancel</a> <!-- Include button for cancel action -->
+</form>

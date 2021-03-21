@@ -1,0 +1,52 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@model LoginViewModel
+@{ 
+    ViewBag.Title = "Login";
+}
+
+<h1>Login</h1> <!-- h1 header -->
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Display validation errors -->
+<form method="post" asp-action="LogIn" asp-route-returnUrl="@Model.ReturnUrl"> <!-- Form for loggin in -->
+    <div class="form-group row"> <!-- Input & validations for username -->
+        <div class="col-sm-2"><label>Username:</label></div>
+        <div class="col-sm-4">
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row"> <!-- Input & validations for password -->
+        <div class="col-sm-2"><label>Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row"> <!-- Checkbox for remember me -->
+        <div class="offset-sm-2 col-sm-4">
+            <input type="checkbox" title="Remember Me" asp-for="RememberMe" class="form-check-inline" />
+            <label>Remember Me</label>
+        </div>
+    </div>
+    <div class="row"> <!-- Button for submitting login -->
+        <div class="offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Log In</button>
+        </div>
+    </div>
+    <div class="row"> <!-- Button for registering as new user -->
+        <div class="offset-2 col-sm-4">
+            Not Registered?
+            <a asp-action="Register">Register as a new user</a>
+        </div>
+    </div>
+</form>

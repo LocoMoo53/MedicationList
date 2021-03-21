@@ -1,0 +1,100 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@model MedicationViewModel
+@{
+    ViewBag.Title = "My Medications";
+}
+
+<h2>Medication List</h2> <!-- Set "Medication List" header -->
+<!-- Check if message is populated & display if populated -->
+@if (TempData["message"] != null)
+{
+    <h4 class="bg-success p-2">@TempData["message"]</h4>
+}
+
+<div class="row">
+    <div class="col-sm-2">
+        <form asp-action="Filter" method="post">
+            <!-- Form for filtering medications -->
+            <div class="form-group">
+                <!-- Filter for drug class -->
+                <label>Drug Class:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(Model.DrugClasses,
+                    "DrugClassId", "Name", Model.Filters.DrugClassId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!-- Filter for dosage form -->
+                <label>Dosage Form:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(Model.DosageForms,
+                    "DosageFormId", "Name", Model.Filters.DosageFormId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <!-- Filter for route -->
+                <label>Route:</label>
+                <select name="filter" class="form-control"
+                        asp-items="@(new SelectList(Model.Routes,
+                    "RouteId", "Name", Model.Filters.RouteId))">
+                    <option value="all">All</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+            <a asp-action="List" asp-route-id="" class="btn btn-primary">Clear</a>
+        </form>
+    </div>
+
+    <div class="col-sm-10">
+        <a asp-action="Add">Add New Medication</a> <!-- Link for adding new medication -->
+        <table class="table table-bordered table-striped">
+            <!-- Create bordered & striped table -->
+            <thead>
+                <tr>
+                    <th>Name</th> <!-- Column for medication names -->
+                    <th>Strength</th> <!-- Column for medication strengths -->
+                    <th>Dosage Form</th> <!-- Column for medication dosage forms -->
+                    <th>Route</th> <!-- Column for medication routes -->
+                    <th></th> <!-- Column for Refill link -->
+                    <th></th> <!-- Column for Edit link -->
+                    <th></th> <!-- Column for Delete link -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through medications -->
+                @foreach (var medication in Model.Medications)
+                {
+                    <tr>
+                        <td>@medication.Name</td> <!-- Display name for each medication -->
+                        <td>@medication.Strength @medication.Uom.Name</td> <!-- Display strength for each medication -->
+                        <td>@medication.DosageForm.Name</td> <!-- Display form for each medication -->
+                        <td>@medication.Route.Name</td> <!-- Display route for each medication -->
+                        <td>
+                            <a asp-controller="Medication" asp-action="Refill"
+                               asp-route-id="@medication.MedicationId"
+                               asp-route-slug="@medication.Slug">Refill</a> <!-- Link for refilling selected medication -->
+                        </td>
+                        <td>
+                            <a asp-controller="Medication" asp-action="Edit"
+                               asp-route-id="@medication.MedicationId"
+                               asp-route-slug="@medication.Slug">Edit</a> <!-- Link for editing selected medication -->
+                        </td>
+                        <td>
+                            <a asp-controller="Medication" asp-action="Delete"
+                               asp-route-id="@medication.MedicationId"
+                               asp-route-slug="@medication.Slug">Delete</a> <!-- Link for deleting selected medication -->
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

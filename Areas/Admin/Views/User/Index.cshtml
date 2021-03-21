@@ -1,0 +1,110 @@
+﻿<!--
+    /*******************************************************************
+ * Team 2: Jason Thomas | Travis Johnson
+ * 12-7-2020
+ * "Final Project (Team)"
+ * "complete a CRUD MVC ASP.NET core application"
+ *******************************************************************/
+-->
+
+@model UserViewModel
+@{
+    ViewData["Title"] = " | Manage Users";
+}
+
+<h1 class="mb-2">Manage Users</h1>
+
+<h5 class="mt-2"><a asp-action="Add">Add a User</a></h5>
+
+<!-- Table for managing users -->
+<table class="table table-bordered table-striped table-sm">
+    <thead>
+        <tr><th>Username</th><th>Roles</th><th></th><th></th><th></th></tr>
+    </thead>
+    <tbody>
+        @if (Model.Users.Count() == 0) // Check if users exist
+        {
+            <tr><td colspan="5">There are no user accounts.</td></tr>
+        }
+        else
+        {
+            @foreach (User user in Model.Users) // Loop through users
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>
+                        @foreach (string roleName in user.RoleNames)
+                        {
+                            <div>@roleName</div>
+                        }
+                    </td>
+                    <td>
+                        <!-- Button for deleting user -->
+                        <form method="post" asp-action="Delete"
+                              asp-route-id="@user.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Delete User
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <!-- Button for adding user to Admin role -->
+                        <form method="post" asp-action="AddToAdmin"
+                              asp-route-id="@user.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Add To Admin
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <!-- Button for removing user from Admin role -->
+                        <form method="post" asp-action="RemoveFromAdmin"
+                              asp-route-id="@user.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Remove From Admin
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h1 class="mb-2">Manage Roles</h1>
+
+@if (Model.Roles.Count() == 0) // Check if any users assigned to Admin role
+{
+    <!-- Button for creating Admin role -->
+    <form method="post" asp-action="CreateAdminRole">
+        <button type="submit" class="btn btn-primary">
+            Create Admin Role
+        </button>
+    </form>
+}
+else
+{
+    <!-- Table for displaying roles -->
+    <table class="table table-bordered table-striped table-sm">
+        <thead>
+            <tr><th>Role</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var role in Model.Roles) // Loop through roles
+            {
+                <tr>
+                    <td>@role.Name</td>
+                    <td>
+                        <!-- Button for deleting role -->
+                        <form method="post" asp-action="DeleteRole"
+                              asp-route-id="@role.Id">
+                            <button type="submit" class="btn btn-primary">
+                                Delete Role
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

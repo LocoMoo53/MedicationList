@@ -1,0 +1,51 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    12-7-2020
+    "Final Project (Team)"
+    "complete a CRUD MVC ASP.NET core application"
+-->
+
+@model RegisterViewModel
+@{ 
+    ViewBag.Title = "Register";
+}
+
+<h1>Register</h1> <!-- h1 header -->
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Show validation errors -->
+<form method="post" asp-action="Register"> <!-- Form for registering as new user -->
+    <div class="form-group row"> <!-- Input & validations for username -->
+        <div class="col-sm-2"><label>Username:</label></div>
+        <div class="col-sm-4">
+            <input asp-for="Username" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row"> <!-- Input & validations for password -->
+        <div class="col-sm-2"><label>Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+        <div class="col">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row"> <!-- Input & validations for confirm password -->
+        <div class="col-sm-2"><label>Confirm Password:</label></div>
+        <div class="col-sm-4">
+            <input type="password" asp-for="ConfirmPassword" class="form-control" />
+        </div>
+    </div>
+    <div class="row"> <!-- Button for submitting registration -->
+        <div class="offset-2 col-sm-4">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+    <div class="row"> <!-- Link for logging in -->
+        <div class="offset-2 col-sm-4">
+            Already registered? <a asp-action="LogIn">Log In</a>
+        </div>
+    </div>
+</form>
