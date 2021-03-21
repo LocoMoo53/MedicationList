@@ -1,0 +1,29 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    10-25-2020
+    "Week 5 Develop, Code, Test and Debug web app Assignments (Team)"
+    "Create an MVC Core web app"
+-->
+
+@model Route
+@{
+    string title = ViewBag.Action + " Route";
+    ViewBag.Title = title;
+}
+
+<h1>@ViewBag.Title</h1> <!-- h1 header -->
+
+<!-- Form for adding new or updating existing route -->
+<form asp-action="Update" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control">
+    </div>
+
+    <input type="hidden" asp-for="RouteId" />
+
+    <button type="submit" class="btn btn-primary">@ViewBag.Action</button>
+    <a asp-action="List" class="btn btn-primary">Cancel</a>
+</form>

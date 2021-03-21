@@ -1,0 +1,34 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    10-25-2020
+    "Week 5 Develop, Code, Test and Debug web app Assignments (Team)"
+    "Create an MVC Core web app"
+-->
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h1>Admin</h1> <!-- h1 header -->
+
+<div class="row">
+    <div class="col-sm-4">
+        <div class="list-group">
+            <!-- Link to manage drug classes -->
+            <a asp-controller="DrugClass" asp-action="Index"
+               class="list-group-item">Manage drug classes</a>
+            <!-- Link to manage UoMs -->
+            <a asp-controller="Uom" asp-action="Index"
+               class="list-group-item">Manage unit of measures</a>
+            <!-- Link to manage dosage forms -->
+            <a asp-controller="DosageForm" asp-action="Index"
+               class="list-group-item">Manage dosage forms</a>
+            <!-- Link to manage routes -->
+            <a asp-controller="Route" asp-action="Index"
+               class="list-group-item">Manage routes</a>
+            <!-- Link to manage users -->
+            <a asp-controller="User" asp-action="Index"
+               class="list-group-item">Manage users</a>
+        </div>
+    </div>
+</div>

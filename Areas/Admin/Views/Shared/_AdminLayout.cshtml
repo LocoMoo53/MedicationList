@@ -1,0 +1,83 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    10-25-2020
+    "Week 5 Develop, Code, Test and Debug web app Assignments (Team)"
+    "Create an MVC Core web app"
+-->
+
+@{
+    string controller =
+        ViewContext.RouteData.Values["controller"].ToString();
+    string action =
+        ViewContext.RouteData.Values["action"].ToString();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title (Admin)</title> <!-- Set page title using ViewBag property -->
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" /> <!-- Use bootstrap CSS -->
+    <link rel="stylesheet" href="~/css/custom.css" /> <!-- Use custom CSS file -->
+
+    <script src="~/lib/jquery/jquery.min.js"></script> <!-- Use jquery -->
+    <script src="~/lib/popper.js/popper.min.js"></script> <!-- Use Popper -->
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script> <!-- Use bootstrap -->
+    @*@RenderSection("scripts", false)*@
+</head>
+<body>
+    <!-- Include header with navigation links -->
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+            <a class="navbar-brand" href="/">My Medication Management Application</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <nav class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="navbar-nav mr-auto">
+                    <!-- Link to Admin Home/Index page -->
+                    <a class="nav-link
+                        @(controller == "Home" && action == "Index" ? "active" : "")"
+                       asp-controller="Home" asp-action="Index">Admin</a>
+                    <!-- Link to Admin DrugClass/List page -->
+                    <a class="nav-link
+                        @(controller == "DrugClass" ? "active" : "")"
+                       asp-controller="DrugClass" asp-action="List">Drug Classes</a>
+                    <!-- Link to Admin Uom/List page -->
+                    <a class="nav-link
+                        @(controller == "Uom" ? "active" : "")"
+                       asp-controller="Uom" asp-action="List">UoMs</a>
+                    <!-- Link to Admin DosageForm/List page -->
+                    <a class="nav-link
+                        @(controller == "DosageForm" ? "active" : "")"
+                       asp-controller="DosageForm" asp-action="List">Dosage Forms</a>
+                    <!-- Link to Admin Route/List page -->
+                    <a class="nav-link
+                        @(controller == "Route" ? "active" : "")"
+                       asp-controller="Route" asp-action="List">Routes</a>
+                    <!-- Link to Admin User/Index page -->
+                    <a class="nav-link
+                        @(controller == "User" ? "active" : "")"
+                       asp-controller="User" asp-action="Index">Users</a>
+                </div>
+                <div class="navbar-nav navbar-right">
+                    <!-- Link to Home/Index page of Admin area -->
+                    <a class="nav-link"
+                       asp-area="" asp-controller="Home" asp-action="Index">View Site</a>
+                </div>
+            </nav>
+        </nav>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+    <!-- Include footer to display copyright information -->
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - Medication Management Application</p>
+    </footer>
+</body>
+</html>

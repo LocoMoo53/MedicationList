@@ -1,0 +1,43 @@
+﻿<!--
+    Team 2: Jason Thomas | Travis Johnson
+    10-25-2020
+    "Week 5 Develop, Code, Test and Debug web app Assignments (Team)"
+    "Create an MVC Core web app"
+-->
+
+@model List<Uom>
+@{
+    ViewBag.Title = "Unit of Measure Manager";
+}
+
+<h1>@ViewBag.Title</h1> <!-- h1 header -->
+<div>
+    <!-- table listing UoMs w/ update & delete options -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+                <th></th>
+        </thead>
+        <tbody>
+            <!-- loop through & display UoMs -->
+            @foreach (var uom in Model)
+            {
+                <tr>
+                    <td>@uom.Name</td>
+                    <td>
+                        <a asp-action="Update"
+                           asp-route-id="@uom.UomId">Update</a>
+                    </td>
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@uom.UomId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <!-- button for adding new UoM -->
+    <a asp-action="Add" class="btn btn-primary">Add New Unit of Measure</a>
+</div>
